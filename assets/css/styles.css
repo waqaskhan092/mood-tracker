@@ -1,0 +1,289 @@
+:root {
+  --primaryColor: #d97904;
+  --primaryHover: #bd6902;
+  --lightBackground: white;
+  --darkBackground: #21242b;
+  --lightText: black;
+  --darkText: #ccc;
+  --dayBoxLight: #f9f8ee;
+  --dayBoxDark: #171a20;
+}
+
+/* Reset and General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  background-color: var(--lightBackground);
+  color: var(--lightText);
+  transition: background 0.3s, color 0.3s;
+  font-size: 16px;
+  background: url("/assets/images/background.png") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+.txt-lg {
+  font-size: 1.5rem;
+}
+
+.txt-xl {
+  font-size: 2rem;
+}
+
+/* Dark Mode */
+.dark-mode {
+  background-color: var(--darkBackground);
+  color: var(--darkText);
+}
+
+/* Dark Mode Toggle Button */
+#modeToggleContainer {
+  padding: 0.5rem 0;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e4;
+  transition: 0.3s;
+}
+.dark-mode #modeToggleContainer {
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkbox-label {
+  background-color: #111;
+  width: 50px;
+  height: 26px;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fa-moon {
+  color: #fff;
+}
+
+.fa-sun {
+  color: #f39c12;
+}
+
+.checkbox-label .ball {
+  background-color: #fff;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(24px);
+}
+
+/* Container */
+.container {
+  max-width: 600px;
+  min-width: 300px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Calendar Controls and Buttons */
+.calendar-controls,
+.view-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0.5rem auto;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.view-buttons {
+  justify-content: center;
+}
+
+/* Buttons */
+button {
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background-color: var(--primaryColor);
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: var(--primaryHover);
+}
+
+/* Mood Buttons */
+.mood-section button {
+  background: #ecebeb;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.dark-mode .mood-section button {
+  background-color: var(--dayBoxDark);
+  color: var(--darkText);
+}
+
+.mood-section button:hover {
+  background-color: #e7e7e7;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.dark-mode .mood-section button:hover {
+  background-color: #050607;
+  color: #fff;
+}
+#modeToggleContainer button {
+  font-size: 0.8rem;
+}
+/* Disabled Buttons */
+button:disabled,
+button[disabled] {
+  background-color: inherit;
+  color: var(--primaryHover);
+  border: 1px solid var(--primaryHover) !important;
+  font-weight: 600;
+}
+
+/* Calendar Grid */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day-name-box {
+  font-weight: bold;
+}
+
+/* Day Box Styling */
+.day-box,
+.single-day {
+  padding: 0.1rem;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  background: var(--dayBoxLight);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.single-day {
+  font-size: 1.2rem;
+}
+
+.dark-mode .day-box,
+.dark-mode .single-day {
+  background-color: var(--dayBoxDark);
+  border: 1px solid #2c354b;
+}
+
+/* Highlight Today */
+.day-box.today {
+  background: #faf6c6;
+  font-weight: bold;
+  color: var(--primaryHover);
+}
+
+.dark-mode .day-box.today {
+  background: #111317;
+  font-weight: bold;
+  border: 1px solid #465579;
+  color: var(--primaryHover);
+}
+
+/* Mood Selection Section */
+.mood-section {
+  margin: 0.5rem 0;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mood-summary {
+  margin-top: 1rem;
+  padding: 10px;
+  background: #f9f8ee;
+  border-radius: 5px;
+}
+
+.dark-mode .mood-summary {
+  background: #171a20;
+  color: #ccc;
+}
+
+.mood-summary ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.mood-summary li {
+  padding: 0.25rem;
+  background-color: #faf6c6;
+  border-radius: 0.25rem;
+}
+.dark-mode .mood-summary li {
+  padding: 0.25rem;
+  background-color: #111317;
+}
+
+/* Default Styles (Large Screens) */
+@media (min-width: 1024px) {
+  /* Add styles for desktops & large screens */
+}
+
+/* Tablets (Medium Screens) */
+@media (max-width: 1023px) {
+  /* Add styles for tablets */
+}
+
+/* Mobile Devices (Small Screens) */
+@media (max-width: 768px) {
+  /* Add styles for mobile devices */
+}
+
+/* Extra Small Devices (Phones) */
+@media (max-width: 480px) {
+  /* Add styles for small phones */
+}
+
+/* Ultra Small Devices (Compact Phones) */
+@media (max-width: 360px) {
+  /* Add styles for very small screens */
+}
