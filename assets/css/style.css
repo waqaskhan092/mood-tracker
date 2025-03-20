@@ -33,11 +33,11 @@ h3 {
 }
 
 .txt-lg {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .txt-xl {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 /* Dark Mode */
@@ -115,7 +115,7 @@ h3 {
 
 /* Optional: Improve container responsiveness */
 .container {
-  max-width: 600px;
+  max-width: 650px;
   margin: 0 auto;
   padding: 10px;
   text-align: center;
@@ -138,7 +138,7 @@ h3 {
 
 /* Buttons */
 button {
-  padding: 0.5rem;
+  padding: 0.4rem;
   border: none;
   cursor: pointer;
   background-color: var(--primaryColor);
@@ -154,12 +154,13 @@ button:hover {
 
 /* Mood Buttons */
 .mood-section button {
-  background: #ecebeb;
-  color: black;
+  background: #fcf6e2;
+  color: var(--primaryHover);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .dark-mode .mood-section button {
@@ -168,8 +169,8 @@ button:hover {
 }
 
 .mood-section button:hover {
-  background-color: #e7e7e7;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  background-color: #fcedbf;
+  box-shadow: rgb(189, 105, 2) 0px 2px 4px, rgb(250, 246, 198) 0px 2px 4px;
 }
 
 .dark-mode .mood-section button:hover {

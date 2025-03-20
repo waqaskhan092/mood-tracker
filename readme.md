@@ -48,11 +48,11 @@ The **Mood Tracker Calendar** is a **responsive** web application that allows us
 │── README.md           # Documentation
 │── 📂 assets/
 │   ├── 📂 css/
-│   │   ├── styles.css  # Main stylesheet
+│   │   ├── style.css  # Main stylesheet
 │   ├── 📂 images/
 │   │   ├── background.png  # Background image
 │   ├── 📂 script/
-│   │   ├── script.js   # Main JavaScript file
+│   │   ├── scripts.js   # Main JavaScript file
 ```
 
 ---

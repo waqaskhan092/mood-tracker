@@ -18,7 +18,7 @@ const moodButtonsContainer = document.getElementById("moodButtons");
 // Create and add mood buttons dynamically
 for (const mood in moodEmojis) {
   const button = document.createElement("button");
-  button.textContent = `${moodEmojis[mood]} ${
+  button.innerHTML = `<span class="txt-lg">${moodEmojis[mood]}</span> ${
     mood.charAt(0).toUpperCase() + mood.slice(1)
   }`;
   button.onclick = () => setMood(mood);
