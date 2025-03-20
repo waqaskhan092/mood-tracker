@@ -31,7 +31,7 @@ const currentDateElem = document.getElementById("currentDate");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const todayBtn = document.getElementById("todayBtn");
-const modeToggleBtn = document.getElementById("modeToggle");
+const modeToggle = document.getElementById("modeToggle");
 
 // Initial state
 let currentDate = new Date();
@@ -39,19 +39,21 @@ let currentView = "month";
 let moodStorage = JSON.parse(localStorage.getItem("moods")) || {}; // Load saved moods
 
 // Dark Mode Toggle
-modeToggleBtn.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  localStorage.setItem(
-    "theme",
-    document.body.classList.contains("dark-mode") ? "dark" : "light"
-  );
-});
-
-// Apply saved dark mode preference
+// Check stored theme and apply it
 if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark-mode");
-  modeToggleBtn.textContent = "Light Mode";
+  modeToggle.checked = true; // Ensure toggle is in the correct position
 }
+// Handle theme toggle on checkbox change
+modeToggle.addEventListener("change", () => {
+  if (modeToggle.checked) {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+  }
+});
 
 // Function to update the calendar display
 function updateCalendar() {
@@ -88,15 +90,10 @@ function updateCalendar() {
 
 // Function to generate a key for storing moods (YYYY-MM-DD format)
 function getDateKey(date) {
-  return date.toISOString().split("T")[0];
-}
-
-// Function to save mood for the selected date
-function setMood(moodName) {
-  const dateKey = getDateKey(currentDate);
-  moodStorage[dateKey] = moodName;
-  localStorage.setItem("moods", JSON.stringify(moodStorage));
-  updateCalendar();
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+    2,
+    "0"
+  )}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
 // Function to update the week view
@@ -154,7 +151,7 @@ function updateMonthView() {
     let moodEmoji = moodEmojis[moodStorage[dateKey]] || "";
     let todayClass = dateKey === getDateKey(new Date()) ? "today" : "";
 
-    monthHTML += `<div class='day-box ${todayClass}'>${day}  <span class="txt-lg">${moodEmoji}</span></div>`;
+    monthHTML += `<div class='${todayClass} day-box'>${day}  <span class="txt-lg">${moodEmoji}</span></div>`;
   }
 
   monthHTML += "</div>";
@@ -228,12 +225,20 @@ function updateMoodSummary() {
 
 // Call this function inside `setMood()`
 function setMood(moodName) {
+  let todayDate = getDateKey(new Date()); // Ensure the correct today's date
   let dateKey = getDateKey(currentDate);
-  moodStorage[dateKey] = moodName;
-  localStorage.setItem("moods", JSON.stringify(moodStorage));
 
-  updateCalendar(); // Refresh calendar
-  updateMoodSummary(); // Update mood counts
+  console.log("Selected Date Key:", dateKey); // Debugging
+
+  if (dateKey === todayDate) {
+    moodStorage[dateKey] = moodName;
+    localStorage.setItem("moods", JSON.stringify(moodStorage));
+
+    updateCalendar(); // Refresh calendar
+    updateMoodSummary(); // Update mood counts
+  } else {
+    alert("Sorry, You can only set or update today's mood!");
+  }
 }
 
 // Call this function on page load to show saved moods

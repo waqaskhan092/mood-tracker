@@ -63,6 +63,8 @@ h3 {
 .checkbox {
   opacity: 0;
   position: absolute;
+  width: 0;
+  height: 0;
 }
 
 .checkbox-label {
@@ -71,19 +73,23 @@ h3 {
   height: 26px;
   border-radius: 50px;
   position: relative;
-  padding: 5px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 5px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
 }
 
 .fa-moon {
   color: #fff;
+  font-size: 14px;
 }
 
 .fa-sun {
-  color: #f39c12;
+  color: var(--primaryColor);
+  font-size: 14px;
 }
 
 .checkbox-label .ball {
@@ -92,21 +98,27 @@ h3 {
   height: 22px;
   position: absolute;
   left: 2px;
-  top: 2px;
+  top: 50%;
+  transform: translateY(-50%);
   border-radius: 50%;
-  transition: transform 0.2s linear;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.checkbox:checked + .checkbox-label {
+  background-color: #e8e8e8; /* Light mode background */
 }
 
 .checkbox:checked + .checkbox-label .ball {
-  transform: translateX(24px);
+  transform: translateX(24px) translateY(-50%);
+  background-color: #222; /* Dark mode ball */
 }
 
-/* Container */
+/* Optional: Improve container responsiveness */
 .container {
   max-width: 600px;
-  min-width: 300px;
   margin: 0 auto;
   padding: 10px;
+  text-align: center;
 }
 
 /* Calendar Controls and Buttons */
@@ -161,7 +173,7 @@ button:hover {
 }
 
 .dark-mode .mood-section button:hover {
-  background-color: #050607;
+  background-color: #000;
   color: #fff;
 }
 #modeToggleContainer button {
@@ -174,6 +186,7 @@ button[disabled] {
   color: var(--primaryHover);
   border: 1px solid var(--primaryHover) !important;
   font-weight: 600;
+  cursor: auto;
 }
 
 /* Calendar Grid */
@@ -185,6 +198,15 @@ button[disabled] {
 
 .day-name-box {
   font-weight: bold;
+  background-color: #faf6c6;
+  border-radius: 0.25rem;
+  border: 1px solid #eee46a;
+  transition: background 0.3s;
+}
+
+.dark-mode .day-name-box {
+  background-color: #000000;
+  border: 1px solid #465579;
 }
 
 /* Day Box Styling */
@@ -194,9 +216,10 @@ button[disabled] {
   border: 1px solid #ddd;
   cursor: pointer;
   background: var(--dayBoxLight);
-  border-radius: 5px;
+  border-radius: 0.25rem;
   display: flex;
   flex-direction: column;
+  transition: background 0.3s, border 0.3s;
 }
 
 .single-day {
@@ -214,6 +237,7 @@ button[disabled] {
   background: #faf6c6;
   font-weight: bold;
   color: var(--primaryHover);
+  border: 1px solid #eee46a;
 }
 
 .dark-mode .day-box.today {
@@ -261,29 +285,4 @@ button[disabled] {
 .dark-mode .mood-summary li {
   padding: 0.25rem;
   background-color: #111317;
-}
-
-/* Default Styles (Large Screens) */
-@media (min-width: 1024px) {
-  /* Add styles for desktops & large screens */
-}
-
-/* Tablets (Medium Screens) */
-@media (max-width: 1023px) {
-  /* Add styles for tablets */
-}
-
-/* Mobile Devices (Small Screens) */
-@media (max-width: 768px) {
-  /* Add styles for mobile devices */
-}
-
-/* Extra Small Devices (Phones) */
-@media (max-width: 480px) {
-  /* Add styles for small phones */
-}
-
-/* Ultra Small Devices (Compact Phones) */
-@media (max-width: 360px) {
-  /* Add styles for very small screens */
 }
